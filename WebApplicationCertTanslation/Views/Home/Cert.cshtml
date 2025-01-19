@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Service";
+}
+<section class="container" id="mainsection">
+
+    <div class="item">
+        <h2> Translate your Certificate fast and easy </h2>
+        <p>Here you can enter your Certificate and Credentials and get your Certificate translated by authorized translators in a matter of seconds</p>
+        <button class="btn btn-danger"><a href="#CertForm">Start now</a></button>
+    </div>
+    <div class="item">
+        <img src="~/images/main.jpg" alt="here an Image" />
+    </div>
+
+</section>
+<section id="CertForm">
+    <form id="certForm">
+       
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Subject" id="exampleRadios2" value="Science">
+            <label class="form-check-label" for="exampleRadios2">
+                Science
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="Subject" id="exampleRadios2" value="Literature">
+            <label class="form-check-label" for="exampleRadios2">
+                Literature
+            </label>
+        </div>
+        <table style="width: 100%;">
+            <tr>
+                <td style="text-align: center;">
+                 <div class="form-group row">
+            
+                <label for="inputArabic" class="col-sm-2 col-form-label">Arabic</label>
+               
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="Arabic" id="inputArabic" placeholder="">
+                </div>
+                    
+        </div>
+        <div class="form-group row">
+            <label for="inputEnglish" class="col-sm-2 col-form-label">English</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="English" id="inputEnglish" placeholder="">
+            </div>
+
+
+           
+        </div>
+        <div class="form-group row">
+            <label for="inputFrench" class="col-sm-2 col-form-label">French</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="French" id="inputFrench" placeholder="">
+            </div>
+        </div>
+       
+        <div class="form-group row">
+            <label for="inputMath" class="col-sm-2 col-form-label">Math</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Math" id="inputMath" placeholder="">
+            </div>
+        </div>
+        </td>
+        <td>
+        <div class="form-group row">
+            <label for="inputPhysics" class="col-sm-2 col-form-label">Physics</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Physik" id="inputPhysics" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputChemie" class="col-sm-2 col-form-label">Chemistry</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Chemie" id="inputChemie" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputBio" class="col-sm-2 col-form-label">Biology</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Bio" id="inputBio" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputReligion" class="col-sm-2 col-form-label">Religon</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Religon" id="inputReligion" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputNational" class="col-sm-2 col-form-label">Social</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="Social" id="inputNational" placeholder="">
+            </div>
+        </div>
+                </td>
+            </tr>
+        </table>
+        
+        <button class="btn btn-primary" type="button" onclick="downloadPdf('/Home/GetHtmlContent')">Translate now</button>
+        <button class="btn btn-primary" type="button" onclick="downloadPdf('/Home/GetCivilReg')">Get CivilReg</button>
+        <button class="btn btn-primary" type="button" onclick="downloadPdf('/Home/GetGeburts')">Get Geburtsurkunde</button>
+        <button class="btn btn-primary" type="button" onclick="downloadPdf('/Home/GetEheBesch')">Get Ehebescheinigung</button><!-- Change input to button -->
+    </form>
+    <script>
+        function downloadPdf(url) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const formData = new FormData(document.getElementById('certForm'));
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(htmlContent => {
+                    // Create a temporary container for the HTML content
+                    var tempContainer = document.createElement('div');
+                    tempContainer.innerHTML = htmlContent;
+
+                    // Use html2pdf to convert the content to a PDF and download it
+                    var opt = {
+                        margin: 0.5, // Adjust margin if needed
+                        filename: 'translated_certificate.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    };
+
+                    html2pdf().set(opt).from(tempContainer).save();
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+</section>

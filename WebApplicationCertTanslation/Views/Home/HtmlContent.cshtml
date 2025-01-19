@@ -1,0 +1,187 @@
+﻿@model WebApplicationCertTanslation.Models.CertData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zertifikat der Sekundarstufe II</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .certificate {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            border: 3px solid #ddd;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            header h2, header h3 {
+                margin: 5px 0;
+            }
+
+        h1, h2, h5 {
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        strong {
+            color: #555;
+        }
+        
+        #footer{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        img{
+             
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <header>
+            <h4>Arabische Republik Syrien</h4>
+            <h5>Bildungsministerium</h5>
+            <h5>Abteilung für Bildung in Aleppo</h5>
+            <h5>Prüfungsabteilung</h5>
+            <p><strong>Schuljahr:</strong> 2021-2022</p>
+        </header>
+
+        <h5>Zeugnis der Sekundarstufe II</h5>
+        <h6 style="text-align: center;">Allgemeines Abschlusszeugnis <strong>Wissenschaftlicher </strong>Zweig</h6>
+        
+
+        <p><strong>Nummer im Register:</strong> [Registernummer]</p>
+
+        <p>Dieses Zeugnis wird ausgestellt, um zu bestätigen, dass der Schüler [Name] erfolgreich die Prüfungen der Sekundarstufe II im wissenschaftlichen Zweig mit einer Note von 210 von 240 und einem Durchschnitt von 87,5 % bestanden hat. Die Bewertung der verschiedenen Fächer ist wie folgt:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Fächer</th>
+                    <th>Maximalpunktzahl</th>
+                    <th>Prüfungsnote</th>
+                    <th>Gesamtnote</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Arabische Sprache</td>
+                    <td>200</td>
+                    <td>[@Model.Arabic]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Englische Sprache</td>
+                    <td>200</td>
+                    <td>[@Model.English]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Französische Sprache</td>
+                    <td>200</td>
+                    <td>[@Model.French]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Mathematik</td>
+                    <td>400</td>
+                    <td>[@Model.Math]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Physik</td>
+                    <td>200</td>
+                    <td>[@Model.Physik]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Chemie</td>
+                    <td>200</td>
+                    <td>[@Model.Chemie]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Biologie</td>
+                    <td>200</td>
+                    <td>[@Model.Bio]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Nationaler Unterricht</td>
+                    <td>100</td>
+                    <td>[@Model.Social]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+                <tr>
+                    <td>Religionsunterricht</td>
+                    <td>100</td>
+                    <td>[@Model.Religon]</td>
+                    <td>[Gesamtnote]</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="footer" class="container">
+            <div class="item"  >
+                <p><strong>Ausgestellt in Aleppo am:</strong> 10.08.2022</p>
+                <p><strong>Name des Direktors:</strong> Khaled Ibrahim</p>
+            </div>
+           <div class="item" >
+               <img src="~/images/stamp.jpg" alt="Signture Image" />
+           </div>
+       
+        </div>
+        <p><strong>Vermerk:</strong> Alle Noten werden gemäß den Anforderungen des syrischen Bildungsministeriums vergeben.</p>
+    </div>
+</body>
+</html>
+
+
